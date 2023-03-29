@@ -32,6 +32,7 @@ RUN apt-get install -y --no-install-recommends \
         git \
         gperf \
         iputils-ping \
+        iproute2 \
         libegl1-mesa \
         liblz4-tool \
         libmagic1 \
@@ -60,6 +61,7 @@ RUN apt-get install -y --no-install-recommends \
         shellcheck \
         socat \
         subversion \
+        sudo \
         swig \
         texinfo \
         unzip \
@@ -77,6 +79,9 @@ RUN sed -i 's/# \(en_US.UTF-8\)/\1/' /etc/locale.gen && \
 
 RUN useradd -ms /bin/bash user && \
     chown -R user:user /home/user
+
+RUN groupadd -f -g 992 kvm
+RUN usermod -aG kvm user
 
 USER user
 WORKDIR /home/user
